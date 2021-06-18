@@ -3,12 +3,15 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class Product extends Model {
 		static associate(models) {
-			const { Color, Product, User, Category, Cart } = models;
+			const { Color, Product, User, Category, Cart, Order, ProductImage } =
+				models;
 
 			Product.belongsToMany(Color, { through: "ProductColors" });
 			Product.belongsTo(User);
 			Product.belongsTo(Category);
 			Product.hasMany(Cart);
+			Product.hasMany(Order);
+			Product.hasMany(ProductImage);
 		}
 	}
 	Product.init(
